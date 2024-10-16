@@ -1,0 +1,15 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // Set this in your .env file
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Photo {
+  id         Int      @id @default(autoincrement())
+  url        String
+  comment    String? // Tùy chọn cho bình luận
+  uploadedAt DateTime @default(now())
+}
