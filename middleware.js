@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
-export async function middleware(req){
+export async function middleware(req) {
     const res = NextResponse.next();
 
     const supabase = createServerClient(
@@ -9,51 +9,43 @@ export async function middleware(req){
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
         {
             cookies: {
-                get(name){
+                get(name) {
                     return req.cookies.get(name)?.value;
                 },
-                set(name, value, options){
+                set(name, value, options) {
                     req.cookies.set({
                         name, value, ...options
-                    })
+                    });
                     const response = NextResponse.next({
                         request: {
                             headers: req.headers
                         }
-                    })
+                    });
                     response.cookies.set({
                         name, value, ...options
-                    })
+                    });
                 },
-                remove(name, options){
+                remove(name, options) {
                     req.cookies.set({
                         name, value: '', ...options
-                    })
+                    });
                     const response = NextResponse.next({
                         request: {
                             headers: req.headers
                         }
-                    })
+                    });
                     response.cookies.set({
                         name, value: '', ...options
-                    })
+                    });
                 }
             }
         }
-    )
+    );
 
-    const {data: {user}} = await supabase.auth.getUser();
-
-    if (user && req.nextUrl.pathname === '/'){
-        return NextResponse.redirect(new URL('/photos', req.url))
-    }
-
-    if (!user && req.nextUrl.pathname !== '/'){
-        return NextResponse.redirect(new URL('/', req.url))
-    }
-    return res
+    // Remove the authentication check for open access
+    return res; // Allow access to all
 }
 
 export const config = {
-    matcher: ['/', '/photos']
-}
+    matcher: ['/', '/photos'] // Define the paths this middleware applies to
+};

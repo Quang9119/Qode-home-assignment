@@ -3,10 +3,8 @@
 import Image from "next/image"
 import { useState } from "react"
 import PhotoModal from "./PhotoModal"
-import { deletePhoto } from "../actions/deletePhoto"
-import { addOrRemoveFromFavorites } from "../actions/addOrRemoveFromFavorites"
 
-export default function Photo({src, alt, width, height, photoName, isFavorited = false}){
+export default function Photo({id,src, alt, width, height, photoName, isFavorited = false}){
     const [showModal, setShowModal] = useState(false)
 
     function toggleModal(){
@@ -21,7 +19,6 @@ export default function Photo({src, alt, width, height, photoName, isFavorited =
             >
 
                 <form 
-                action={deletePhoto}
                 className="absolute bottom-2.5 right-10 z-10"
                 >
                     <input type="hidden" name="photoPath" value={src} />
@@ -33,12 +30,10 @@ export default function Photo({src, alt, width, height, photoName, isFavorited =
                 </form>
 
                 <form 
-                action={addOrRemoveFromFavorites}
                 className="absolute bottom-2.5 right-2.5 z-10"
                 >
                     <input type="hidden" name="photoName" value={photoName} />
-                    <input type="hidden" name="isFavorited" value={isFavorited} />
-                    <button 
+                    <button
                     type="submit"
                     className="bg-transparent border-none text-white cursor-pointer hover:text-green-500 hover:scale-110 transition duration-300"
                     >
@@ -55,7 +50,7 @@ export default function Photo({src, alt, width, height, photoName, isFavorited =
                 />
             </div>
             {
-                showModal && <PhotoModal src={src} alt={alt} onClose={toggleModal} />
+                showModal && <PhotoModal id={id} src={src} alt={alt} onClose={toggleModal} />
             }
         </>
       
