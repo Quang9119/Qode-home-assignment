@@ -4,7 +4,7 @@ import {createServerClient} from "@supabase/ssr";
 
 async function fetchPhotosFromAPI() {
     try {
-        const response = await fetch("http://localhost:3000/api/get-photos");
+        const response = await fetch("api/get-photos");
         if (!response.ok) {
             throw new Error("Failed to fetch photos");
         }
