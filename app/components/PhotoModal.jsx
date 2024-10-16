@@ -13,10 +13,6 @@ export default function PhotoModal({ id, src, alt, onClose }) {
         if (!comment.trim()) return;
 
         const response = await fetch('api/comment-photo', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
             body: JSON.stringify({ photoId: id, comment }),
         });
 

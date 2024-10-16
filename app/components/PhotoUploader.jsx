@@ -50,10 +50,6 @@ export default function PhotoUploader(){
 
             // Revalidate đường dẫn và làm mới trang
             await fetch('api/revalidate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
                 body: JSON.stringify({path: '/photos'})
             });
 
