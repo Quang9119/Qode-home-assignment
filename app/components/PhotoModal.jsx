@@ -12,7 +12,7 @@ export default function PhotoModal({ id, src, alt, onClose }) {
     const handleCommentSubmit = async () => {
         if (!comment.trim()) return;
 
-        const response = await fetch('/api/comment-photo', {
+        const response = await fetch('http://localhost:3000/api/comment-photo', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
