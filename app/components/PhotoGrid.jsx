@@ -4,25 +4,17 @@ import {createServerClient} from "@supabase/ssr";
 
 async function fetchPhotosFromAPI() {
     try {
-        const response = await fetch('api/get-photos', { // Corrected the placement of the object for options
-            method: 'POST', // Moved the method option inside the fetch options object
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
+        const response = await fetch("http://localhost:3000/api/get-photos");
         if (!response.ok) {
             throw new Error("Failed to fetch photos");
         }
-
         const data = await response.json();
         return data; // return the fetched photos data
     } catch (error) {
         console.error("Error fetching photos from API:", error);
-        return []; // Return an empty array on error
+        return [];
     }
 }
-
 
 async function fetchFavoritePhotos(user, supabaseServer) {
     const { data, error } = await supabaseServer
