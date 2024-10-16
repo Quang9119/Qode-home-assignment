@@ -37,7 +37,7 @@ export default function PhotoUploader(){
             const photoUrl = signedUrlData.signedUrl;
             console.log("URL is ")
             // Gửi yêu cầu lưu URL ảnh vào Postgres local
-            const savePhotoResponse = await fetch('/api/savePhoto', {
+            const savePhotoResponse = await fetch('http://localhost:3000/api/savePhoto', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ export default function PhotoUploader(){
             }
 
             // Revalidate đường dẫn và làm mới trang
-            await fetch('/api/revalidate', {
+            await fetch('http://localhost:3000/api/revalidate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
