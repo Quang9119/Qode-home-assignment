@@ -1,33 +1,27 @@
-'use client'
+'use client';
 
 import { useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import {revalidatePath} from "next/cache";
+import { useDispatch } from "react-redux";
+import { updatePhotoComment } from '@/redux/photosSlice';
 
 export default function PhotoModal({ id, src, alt, onClose }) {
     const [comment, setComment] = useState("");
-    const router= useRouter()
+    const dispatch = useDispatch();
+
     // Handle comment submission
     const handleCommentSubmit = async () => {
         if (!comment.trim()) return;
 
-        const response = await fetch('/api/comment-photo', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ photoId: id, comment }),
-        });
+        try {
+            // Dispatch the Redux action to update the comment
+            await dispatch(updatePhotoComment({ photoId: id, comment }));
 
-        const data = await response.json();
-        if (response.ok) {
-            console.log("Comment updated:", data);
+            // If successful, reset the comment input and close the modal
             setComment(""); // Reset comment input
             onClose();
-            router.refresh();
-        } else {
-            console.error("Error:", data.message);
+        } catch (error) {
+            console.error("Error updating comment:", error);
         }
     };
 
