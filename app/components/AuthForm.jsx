@@ -72,30 +72,30 @@ export default function AuthForm(){
             </button>
             <p className="text-center text-white">
                 {isNewUser ? (
-                <>
-                    Already have an account? {' '}
-                    <button
-                    type="button"
-                    onClick={() => zz}
-                    className="text-indigo-400 hover:text-indigo-600"
-                    >
-                    Sign In
-                    </button>
-                </>
+                    <>
+                        Already have an account? {' '}
+                        <button
+                            type="button"
+                            onClick={() => setIsNewUser(false)}
+                            className="text-indigo-400 hover:text-indigo-600"
+                        >
+                            Sign In
+                        </button>
+                    </>
                 ) : (
-                <>
-                    Don't have an account? {' '}
-                    <button
-                    type="button"
-                    onClick={() => setIsNewUser(true)}
-                    className="text-indigo-400 hover:text-indigo-600"
-                    >
-                    Sign Up
-                    </button>
-                </>
+                    <>
+                        Don't have an account? {' '}
+                        <button
+                            type="button"
+                            onClick={() => setIsNewUser(true)}
+                            className="text-indigo-400 hover:text-indigo-600"
+                        >
+                            Sign Up
+                        </button>
+                    </>
                 )}
             </p>
             {isSigningUp && signUpMessage}
         </form>
-  );
+    );
 }
