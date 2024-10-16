@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation"
 
 export default function AuthForm(){
     const [isNewUser, setIsNewUser] = useState(false)
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('nguyenminhquangquangquang@gmail.com')
+    const [password, setPassword] = useState('123456')
     const [isSigningIn, setIsSigningIn] = useState(false)
     const [isSigningUp, setIsSigningUp] = useState(false)
     const router = useRouter()
