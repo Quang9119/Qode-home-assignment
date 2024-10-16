@@ -2,7 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Thunk to fetch photos (if not already created)
 export const fetchPhotos = createAsyncThunk('photos/fetchPhotos', async () => {
-    const response = await fetch('/api/get-photos');
+    const response = await fetch('/api/get-photos', {
+        method: 'GET',
+        cache: 'no-store',  // Prevents caching of the request
+    });
     const data = await response.json();
     return data;
 });

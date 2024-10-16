@@ -14,13 +14,13 @@ export default function PhotoGrid({ favorites = false }) {
     useEffect(() => {
         if (photoStatus === 'idle') {
             dispatch(fetchPhotos());
+
         }
     }, [photoStatus, dispatch]);
 
     const displayedPhotos = favorites
         ? photos.filter(photo => photo.isFavorited)
         : photos;
-    console.log("asdasasdasdasdas", displayedPhotos);
     if (photoStatus === 'loading') {
         return <div>Loading...</div>;
     }
