@@ -38,10 +38,6 @@ export default function PhotoUploader(){
             console.log("URL is ")
             // Gửi yêu cầu lưu URL ảnh vào Postgres local
             const savePhotoResponse = await fetch('api/savePhoto', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
                 body: JSON.stringify({
                     photoUrl,
                     comment: ""
