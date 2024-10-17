@@ -1,22 +1,17 @@
-import PhotoGrid from "../components/PhotoGrid";
-import Nav from "../components/Nav";
-import PhotoUploader from "../components/PhotoUploader";
-import SignOutButton from "../components/SignOutButton";
+// app/photos/page.jsx
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
+import Nav from "@/components/Nav";
+import PhotoGrid from "@/components/PhotoGrid";
+import PhotoUploader from "@/components/PhotoUploader";
+import SignOutButton from "@/components/SignOutButton";
 
-export async function getServerSideProps() {
-    const response = await fetch(`api/get-photos`);
-    const photos = await response.json();
+// This is a server component (default in app router)
+export default async function Photos() {
+    // Fetch photos from the backend API route
+    const res = await fetch(`api/get-photos`, { cache: 'no-store' });
+    const photos = await res.json();
 
-    return {
-        props: {
-            initialPhotos: photos,
-        },
-    };
-}
-
-export default function Photos({ initialPhotos }) {
     return (
         <Provider store={store}>
             <main className="min-h-screen bg-gray-800 text-white relative p-10">
@@ -26,7 +21,7 @@ export default function Photos({ initialPhotos }) {
                         <h1 className="text-4xl font-bold mb-4">Photos</h1>
                         <PhotoUploader />
                     </div>
-                    <PhotoGrid initialPhotos={initialPhotos} />
+                    <PhotoGrid initialPhotos={photos} />
                 </div>
                 <div className="absolute top-4 right-4">
                     <SignOutButton />
