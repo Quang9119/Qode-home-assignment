@@ -1,12 +1,10 @@
-// app/photos/page.jsx
+import PhotoGrid from "../components/PhotoGrid";
+import Nav from "../components/Nav";
+import PhotoUploader from "../components/PhotoUploader";
+import SignOutButton from "../components/SignOutButton";
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
-import Nav from "@/components/Nav";
-import PhotoGrid from "@/components/PhotoGrid";
-import PhotoUploader from "@/components/PhotoUploader";
-import SignOutButton from "@/components/SignOutButton";
 
-// This is a server component (default in app router)
 export default async function Photos() {
     // Fetch photos from the backend API route
     const res = await fetch(`api/get-photos`, { cache: 'no-store' });
