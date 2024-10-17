@@ -5,6 +5,9 @@ export const fetchPhotos = createAsyncThunk('photos/fetchPhotos', async () => {
     const response = await fetch('/api/get-photos', {
         method: 'GET',
         cache: 'no-store',  // Prevents caching of the request
+        next: {
+            revalidate: 5, // 1 hour
+        },
     });
     const data = await response.json();
     return data;
@@ -15,9 +18,13 @@ export const updatePhotoComment = createAsyncThunk(
     'photos/updateComment',
     async ({ photoId, comment }) => {
         const response = await fetch('/api/comment-photo', {
+            revalidate: 5,
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+            },
+            next: {
+                revalidate: 5, // 1 hour
             },
             body: JSON.stringify({ photoId, comment }),
         });
